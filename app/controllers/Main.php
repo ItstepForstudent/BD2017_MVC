@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Post;
 use app\models\User;
 use core\base\Controller;
 use core\base\View;
@@ -19,12 +20,22 @@ class Main extends Controller
 //        $v->setTemplate();
 //        echo $v->render();
        // User::insert(["name"=>"oleg","pass"=>"233"]);
-        User::where("pass","?")->delete(["0000"]);
-        //$users = User::where("id",">",":minid")->all(["minid"=>4]);
-        User::where("name","'oleg'")->update(["pass"=>"olegoleg5"]);
-        $users = User::all();
-        echo "<pre>";
-        print_r($users);
+//        User::where("pass","?")->delete(["0000"]);
+////        //$users = User::where("id",">",":minid")->all(["minid"=>4]);
+////        User::where("name","'oleg'")->update(["pass"=>"olegoleg5"]);
+////        $users = User::all();
+////        $users[0]->dump();
+////        echo "<pre>";
+////        print_r($users);
+
+//        $user = User::where("name",'?')->first(["Alexandr"]);
+//        $posts =  $user->posts()->all();
+//        echo "<pre>";
+//        foreach ($posts as $post){
+//            var_dump($post);
+//        }
+        $post = Post::where("id",1)->first();
+        var_dump($post->author());
 
     }
 

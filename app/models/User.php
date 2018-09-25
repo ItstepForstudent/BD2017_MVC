@@ -14,4 +14,8 @@ use core\base\Model;
 class User extends Model
 {
     //public static $table="ggg";
+    public function posts(){
+        return $this->hasMany(Post::class,"user_id","id");
+    }
+
 }

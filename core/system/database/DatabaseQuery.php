@@ -13,6 +13,14 @@ class DatabaseQuery
 {
     private $table, $db;
 
+    private $clazz=NULL;
+    public function setClazz($clazz)
+    {
+        $this->clazz = $clazz;
+        return $this;
+    }
+
+
     public function __construct(Database $database, string $table)
     {
         $this->db = $database;
@@ -303,11 +311,26 @@ class DatabaseQuery
     }
 
     public function all(array $params=[]){
-        return $this->db->selectAll($this->buildSelect(),$params);
+        $result = $this->db->selectAll($this->buildSelect(),$params);
+        if($this->clazz === NULL) return $result;
+        $res = [];
+        foreach ($result as $r){
+            $inst = new $this->clazz;
+            $inst->setData($r);
+            $res[]=$inst;
+        }
+        return $res;
+
+
     }
     public function first(array $params=[]){
-        return $this->db->selectOne($this->buildSelect(),$params);
+        $result = $this->db->selectOne($this->buildSelect(),$params);
+        if($this->clazz === NULL) return $result;
+        $inst = new $this->clazz;
+        $inst->setData($result);
+        return $inst;
     }
+
     public function value(array $params=[]){
         return $this->db->selectValue($this->buildSelect(),$params);
     }
