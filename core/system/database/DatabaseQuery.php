@@ -313,6 +313,7 @@ class DatabaseQuery
     public function all(array $params=[]){
         $result = $this->db->selectAll($this->buildSelect(),$params);
         if($this->clazz === NULL) return $result;
+        if(!$result)return [];
         $res = [];
         foreach ($result as $r){
             $inst = new $this->clazz;
@@ -327,7 +328,7 @@ class DatabaseQuery
         $result = $this->db->selectOne($this->buildSelect(),$params);
         if($this->clazz === NULL) return $result;
         $inst = new $this->clazz;
-        $inst->setData($result);
+        if($result) $inst->setData($result);
         return $inst;
     }
 

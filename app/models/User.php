@@ -11,7 +11,7 @@ namespace app\models;
 
 use core\base\Model;
 
-class User extends Model
+class User extends \core\system\models\User
 {
     //public static $table="ggg";
     public function posts(){

@@ -45,6 +45,11 @@ abstract class Model
         $this->data[$name]=$value;
     }
 
+    public function __isset($name)
+    {
+       return isset($this->data[$name]);
+    }
+
 
     public function save(){
         $table = self::getTableName();

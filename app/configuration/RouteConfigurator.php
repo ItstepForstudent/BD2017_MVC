@@ -18,7 +18,9 @@ class RouteConfigurator
 {
     public static function routerConfigure(){
         Router::instance()->addRoute(new Route("","main","index"));
-        Router::instance()->addRoute(new Route("test","main","test"));
+        Router::instance()->addRoute(new Route("register","auth","register"));
+        Router::instance()->addRoute(new Route("login","auth","login"));
+        Router::instance()->addRoute(new Route("logout","auth","logout"));
         Router::instance()->addRoute(new Route("404","c404","index"));
     }
 
